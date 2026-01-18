@@ -1,0 +1,28 @@
+{
+  "name": "${localWorkspaceFolderBasename}",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+  "containerEnv": {
+    "OLLAMA_HOST": "http://host.docker.internal:11434",
+    "OLLAMA_URL": "http://host.docker.internal:11434",
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "esbenp.prettier-vscode",
+        "ms-playwright.playwright"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install && bash .devcontainer/post_create.sh",
+  "remoteUser": "vscode"
+}
